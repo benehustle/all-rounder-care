@@ -778,19 +778,79 @@ body.nav-open {
   }
 }
 
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Centre a single orphan card on the last row (2-column layout only) */
+  .services-grid .service-card:nth-child(5):last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(100%, calc((100% - 1.5rem) / 2));
+  }
+
+  .locations-grid .location-card:nth-child(7):last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(100%, calc((100% - 1.5rem) / 2));
+  }
+}
+
 @media (min-width: 1024px) {
+  /* 12-column grid so partial last rows can be visually centred */
   .services-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .services-grid .service-card:nth-child(1) {
+    grid-column: span 4;
+  }
+
+  .services-grid .service-card:nth-child(2) {
+    grid-column: span 4;
+  }
+
+  .services-grid .service-card:nth-child(3) {
+    grid-column: span 4;
+  }
+
+  /* Four cards: centre the sole card on row 2 */
+  .services-grid .service-card:nth-child(4):last-child {
+    grid-column: 5 / span 4;
+  }
+
+  /* Five cards: centre the pair on row 2 */
+  .services-grid .service-card:nth-child(4):not(:last-child) {
+    grid-column: 3 / span 4;
+  }
+
+  .services-grid .service-card:nth-child(5) {
+    grid-column: 7 / span 4;
   }
 
   .locations-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .locations-grid .location-card:nth-child(1),
+  .locations-grid .location-card:nth-child(2),
+  .locations-grid .location-card:nth-child(3) {
+    grid-column: span 4;
+  }
+
+  .locations-grid .location-card:nth-child(4),
+  .locations-grid .location-card:nth-child(5),
+  .locations-grid .location-card:nth-child(6) {
+    grid-column: span 4;
+  }
+
+  .locations-grid .location-card:nth-child(7) {
+    grid-column: 5 / span 4;
   }
 }
 
 .service-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding: 28px;
   background: var(--color-white);
   border: 2px solid var(--color-border);
@@ -815,6 +875,8 @@ body.nav-open {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--color-primary);
   transition: background 0.25s ease, color 0.25s ease;
 }
@@ -841,6 +903,7 @@ body.nav-open {
 .service-card__arrow {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
   font-weight: 600;
   font-size: 0.9375rem;
@@ -998,6 +1061,7 @@ body.nav-open {
   color: inherit;
   font-weight: 700;
   font-family: var(--font-family-heading);
+  text-align: center;
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
