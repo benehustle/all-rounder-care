@@ -86,28 +86,17 @@ function initNav() {
    ----------------------------------------------------------------------------- */
 
 function setActiveNavLink() {
-  const path = window.location.pathname;
-  let page = path.split("/").pop() || "";
+  let page = window.location.pathname.split("/").pop() || "";
   if (!page || page === "") page = "index.html";
-  if (!page.endsWith(".html")) page += ".html";
+  if (!page.endsWith(".html")) page = `${page}.html`;
 
   document.querySelectorAll(".nav-desktop__links a, .nav-drawer__links a").forEach((link) => {
+    link.classList.remove("is-active");
     const href = link.getAttribute("href");
     if (!href || href.startsWith("#") || href.startsWith("tel:")) return;
     const linkFile = href.split("/").pop();
-    if (linkFile === page || (page === "index.html" && (linkFile === "index.html" || href === "index.html"))) {
-      link.classList.add("is-active");
-    }
+    if (linkFile === page) link.classList.add("is-active");
   });
-
-  /* Home */
-  if (page === "index.html") {
-    document.querySelectorAll('a[href="index.html"]').forEach((link) => {
-      if (link.closest(".nav-desktop__links, .nav-drawer__links")) {
-        link.classList.add("is-active");
-      }
-    });
-  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -174,7 +163,7 @@ function initCounters() {
         if (!entry.isIntersecting) return;
         observer.unobserve(entry.target);
         const el = entry.target;
-        const target = parseFloat(el.dataset.target, 10);
+        const target = Number.parseFloat(el.dataset.target) || 0;
         const suffix = el.dataset.suffix || "";
         const decimals = parseInt(el.dataset.decimals, 10) || 0;
         const duration = 1800;
@@ -248,6 +237,7 @@ function initContactForm() {
     const name = form.querySelector('[name="name"]');
     const email = form.querySelector('[name="email"]');
     const phone = form.querySelector('[name="phone"]');
+    const service = form.querySelector('[name="service"]');
     const message = form.querySelector('[name="message"]');
 
     let valid = true;
@@ -271,6 +261,7 @@ function initContactForm() {
       showFieldError(email, "Please enter a valid email address.");
     }
     if (!phone || !phone.value.trim()) showFieldError(phone, "Please enter your phone number.");
+    if (!service || !service.value.trim()) showFieldError(service, "Please select a service.");
     if (!message || !message.value.trim()) showFieldError(message, "Please tell us how we can help.");
 
     if (!valid) return;
