@@ -9,6 +9,7 @@
   --color-primary-dark:    #C97A72;
   --color-secondary:       #2B7A6F;
   --color-secondary-rgb:   43, 122, 111;
+  --color-secondary-dark:  #1f5f56;
   --color-white:           #ffffff;
   --color-gray-50:         #f8fafc;
   --color-gray-100:        #f1f5f9;
@@ -393,7 +394,7 @@ h3 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.25rem;
-  background: var(--color-primary);
+  background: var(--color-secondary);
   color: var(--color-white) !important;
   border-radius: var(--radius-full);
   text-decoration: none;
@@ -403,7 +404,7 @@ h3 {
 }
 
 .nav-desktop__cta:hover {
-  background: var(--color-secondary);
+  background: var(--color-secondary-dark);
   transform: translateY(-1px);
 }
 
