@@ -7,9 +7,23 @@
       <ul class="nav-desktop__links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li class="nav-desktop__item nav-desktop__item--dropdown">
+          <a href="services.html" class="nav-desktop__services-root">Services</a>
+          <ul class="nav-desktop__dropdown" role="list">
+            <li><a href="services.html">All services overview</a></li>
+            <li><a href="assistance-with-daily-living.html">Assistance with Daily Living</a></li>
+            <li><a href="community-participation-access.html">Community Participation &amp; Access</a></li>
+            <li><a href="personal-care.html">Personal Care</a></li>
+            <li><a href="ndis-plan-advice-support.html">NDIS Plan Advice &amp; Support</a></li>
+            <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <div class="nav-desktop__contact">
+        <a href="mailto:inquiries@allroundercare.com.au">inquiries@allroundercare.com.au</a>
+        <span>Bertram WA 6167</span>
+      </div>
       <a class="nav-desktop__cta" href="tel:+61451465518" aria-label="Call All Rounder Care">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         0451 465 518
@@ -27,9 +41,26 @@
   <ul class="nav-drawer__links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-drawer__item nav-drawer__item--dropdown">
+      <button type="button" class="nav-drawer__dropdown-toggle" aria-expanded="false" aria-controls="nav-drawer-services-list" id="nav-drawer-services-btn">
+        <span>Services</span>
+        <svg class="nav-drawer__caret" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <ul id="nav-drawer-services-list" class="nav-drawer__dropdown" role="list" hidden>
+        <li><a href="services.html">All services overview</a></li>
+        <li><a href="assistance-with-daily-living.html">Assistance with Daily Living</a></li>
+        <li><a href="community-participation-access.html">Community Participation &amp; Access</a></li>
+        <li><a href="personal-care.html">Personal Care</a></li>
+        <li><a href="ndis-plan-advice-support.html">NDIS Plan Advice &amp; Support</a></li>
+        <li><a href="transport.html">Transport</a></li>
+      </ul>
+    </li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
+  <div class="nav-drawer__contact">
+    <a href="mailto:inquiries@allroundercare.com.au">inquiries@allroundercare.com.au</a>
+    <span>Bertram WA 6167</span>
+  </div>
   <div class="nav-drawer__cta">
     <a class="nav-desktop__cta" href="tel:+61451465518">0451 465 518</a>
   </div>

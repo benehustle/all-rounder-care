@@ -42,6 +42,12 @@ function initNav() {
     drawer.classList.remove("is-open");
     overlay.classList.remove("is-open");
     document.body.classList.remove("nav-open");
+    drawer.querySelectorAll(".nav-drawer__dropdown-toggle").forEach((btn) => {
+      btn.setAttribute("aria-expanded", "false");
+      const panelId = btn.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (panel) panel.hidden = true;
+    });
   }
 
   function openDrawer() {
@@ -61,6 +67,17 @@ function initNav() {
     overlay.addEventListener("click", closeDrawer);
     drawer.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", closeDrawer);
+    });
+
+    drawer.querySelectorAll(".nav-drawer__dropdown-toggle").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const open = btn.getAttribute("aria-expanded") === "true";
+        const panelId = btn.getAttribute("aria-controls");
+        const panel = panelId ? document.getElementById(panelId) : null;
+        btn.setAttribute("aria-expanded", open ? "false" : "true");
+        if (panel) panel.hidden = open;
+      });
     });
   }
 
@@ -85,18 +102,38 @@ function initNav() {
    setActiveNavLink — pathname vs href
    ----------------------------------------------------------------------------- */
 
+const SERVICE_PAGE_FILES = new Set([
+  "services.html",
+  "assistance-with-daily-living.html",
+  "community-participation-access.html",
+  "personal-care.html",
+  "ndis-plan-advice-support.html",
+  "transport.html",
+]);
+
 function setActiveNavLink() {
   let page = window.location.pathname.split("/").pop() || "";
   if (!page || page === "") page = "index.html";
   if (!page.endsWith(".html")) page = `${page}.html`;
 
-  document.querySelectorAll(".nav-desktop__links a, .nav-drawer__links a").forEach((link) => {
-    link.classList.remove("is-active");
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("#") || href.startsWith("tel:")) return;
-    const linkFile = href.split("/").pop();
-    if (linkFile === page) link.classList.add("is-active");
-  });
+  document
+    .querySelectorAll(
+      ".nav-desktop__links a, .nav-desktop__dropdown a, .nav-drawer__links a, .nav-drawer__dropdown a"
+    )
+    .forEach((link) => {
+      link.classList.remove("is-active");
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("tel:")) return;
+      const linkFile = href.split("/").pop();
+      if (linkFile === page) link.classList.add("is-active");
+    });
+
+  if (SERVICE_PAGE_FILES.has(page) && page !== "services.html") {
+    document.querySelectorAll("a.nav-desktop__services-root").forEach((a) => a.classList.add("is-active"));
+    document.querySelectorAll(".nav-drawer__dropdown-toggle").forEach((btn) => btn.classList.add("is-active"));
+  } else {
+    document.querySelectorAll(".nav-drawer__dropdown-toggle").forEach((btn) => btn.classList.remove("is-active"));
+  }
 }
 
 /* -----------------------------------------------------------------------------
