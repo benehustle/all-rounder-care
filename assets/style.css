@@ -183,7 +183,7 @@ h3 {
   color: var(--color-white);
 }
 
-.section--primary a {
+.section--primary a:not(.btn) {
   color: var(--color-white);
 }
 
@@ -840,12 +840,12 @@ body.nav-open {
 
 .btn--light {
   background: var(--color-white);
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .btn--light:hover {
   background: var(--color-gray-100);
-  color: var(--color-primary-dark);
+  color: var(--color-secondary-dark);
 }
 
 .hero__trust-bar {
