@@ -303,14 +303,55 @@ function initContactForm() {
 
     if (!valid) return;
 
-    if (successEl) {
-      successEl.textContent =
-        "Thanks — we'll be in touch soon! For urgent jobs call " +
-        displayPhone +
-        " directly.";
-      successEl.classList.add("is-visible");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : "";
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
     }
-    form.reset();
+
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData);
+    if (!params.has("form-name")) {
+      params.append("form-name", form.getAttribute("name") || "contact");
+    }
+
+    const actionPath = (form.getAttribute("action") || "").trim() || window.location.pathname || "/";
+
+    fetch(actionPath, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Bad response");
+        if (successEl) {
+          successEl.textContent =
+            "Thanks — we'll be in touch soon! For urgent jobs call " +
+            displayPhone +
+            " directly.";
+          successEl.classList.remove("is-error");
+          successEl.classList.add("is-visible");
+        }
+        form.reset();
+      })
+      .catch(() => {
+        if (successEl) {
+          successEl.textContent =
+            "We could not send your message just now. Please try again or call " +
+            displayPhone +
+            ".";
+          successEl.classList.add("is-error");
+          successEl.classList.add("is-visible");
+        }
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      });
   });
 }
 

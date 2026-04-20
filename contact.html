@@ -55,7 +55,11 @@
         <div class="contact-form-wrap animate-on-scroll">
           <h2 id="contact-form-heading">Send us a message</h2>
           <p class="text-muted">Fields marked below are required so we can respond with a useful first reply.</p>
-          <form id="contactForm" novalidate>
+          <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <p class="sr-only">
+              <label for="contact-bot-field">Do not complete this field</label>
+              <input type="text" id="contact-bot-field" name="bot-field" tabindex="-1" autocomplete="off">
+            </p>
             <div class="form-success" role="status" aria-live="polite"></div>
             <div>
               <label for="contact-name">Name</label>

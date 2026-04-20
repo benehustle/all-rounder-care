@@ -1672,6 +1672,11 @@ body.nav-open {
   display: block;
 }
 
+.form-success.is-error {
+  background: rgba(185, 28, 28, 0.08);
+  border-color: var(--color-error);
+}
+
 .contact-details {
   padding: 1.75rem;
   background: var(--color-gray-50);
